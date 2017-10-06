@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>object</title>
+<script>
+function Person(name,age, height, weight){
+	this.name=name;
+	this.age=age;
+	this.height=height;
+	this.weight=weight;
+	
+		}
+		var Man=new Person("Jakir",30,6.2, "50 kg")
+		var display="Name: " +Man.name+"<br>";
+		 display+="Age: " +Man.age+"<br>";
+		  display+=Man.height+"<br>";
+		   display+=Man.weight;
+		 
+  document.write(display);
+  
+document.write("<hr>");
+
+var Man=new Person("Joy",90,6.2, "90 kg")
+		var display1="Name: " +Man.name+"<br>";
+		 display1+="Age: " +Man.age+"<br>";
+		  display1+=Man.height+"<br>";
+		   display1+=Man.weight;
+		 document.write(display1)
+</script>
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,578 @@
+Table created.
+
+SQL> alter table emp add(phone number(11),job_tittle varchar2(10));
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EID                                       NOT NULL NUMBER(10)
+ ENAME                                              VARCHAR2(50)
+ SALARY                                             NUMBER(10)
+ HIRE_DATE                                          DATE
+ ADDRESS                                            VARCHAR2(100)
+ PHONE                                              NUMBER(11)
+ JOB_TITTLE                                         VARCHAR2(10)
+
+SQL> insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle');
+Enter value for eid: 1000
+Enter value for ename: noor
+Enter value for salary: 50000
+Enter value for hire_date: 21-feb-1999
+Enter value for address: uttara
+Enter value for phone: 01914210746
+Enter value for job_tittle: GM
+old   1: insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle')
+new   1: insert into emp values(1000,'noor',50000,'21-feb-1999','uttara',01914210746,'GM')
+
+1 row created.
+
+SQL> @insert
+SP2-0310: unable to open file "insert.sql"
+SQL> insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle');
+Enter value for eid: 1010
+Enter value for ename: mohammad
+Enter value for salary: 45000
+Enter value for hire_date: 21-mar-1999
+Enter value for address: uttara
+Enter value for phone: 01673470132
+Enter value for job_tittle: agm
+old   1: insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle')
+new   1: insert into emp values(1010,'mohammad',45000,'21-mar-1999','uttara',01673470132,'agm')
+
+1 row created.
+
+SQL> insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle');
+Enter value for eid: 1020
+Enter value for ename: parvez
+Enter value for salary: 42000
+Enter value for hire_date: 21-feb-1999
+Enter value for address: tongi
+Enter value for phone: 01324567896
+Enter value for job_tittle: accountent
+old   1: insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle')
+new   1: insert into emp values(1020,'parvez',42000,'21-feb-1999','tongi',01324567896,'accountent')
+
+1 row created.
+
+SQL> insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle');
+Enter value for eid:
+Enter value for ename: jaker
+Enter value for salary: 40000
+Enter value for hire_date: 01-apr-1999
+Enter value for address: mirpur
+Enter value for phone: 017456123
+Enter value for job_tittle: amaneger
+old   1: insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle')
+new   1: insert into emp values(,'jaker',40000,'01-apr-1999','mirpur',017456123,'amaneger')
+insert into emp values(,'jaker',40000,'01-apr-1999','mirpur',017456123,'amaneger')
+                       *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle');
+Enter value for eid: 1030
+Enter value for ename: jaker
+Enter value for salary: 40000
+Enter value for hire_date: 01-apr-1999
+Enter value for address: mirpur
+Enter value for phone: 017456123
+Enter value for job_tittle: amaneger
+old   1: insert into emp values(&eid,'&ename',&salary,'&hire_date','&address',&phone,'&job_tittle')
+new   1: insert into emp values(1030,'jaker',40000,'01-apr-1999','mirpur',017456123,'amaneger')
+
+1 row created.
+
+SQL> insert into emp values(1040,'hossin',41000,'01-jun-2000','mohakhali',01524135689,'postman');
+
+1 row created.
+
+SQL> insert into emp values(1050,'hasann',41000,'01-jun-2000','mohakhali',01524135689,'postman');
+
+1 row created.
+
+SQL> insert into emp values(1060,'nanno',41000,'01-jun-2000','mohakhali',01524135689,'postman');
+
+1 row created.
+
+SQL> select * from emp;
+
+       EID ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+HIRE_DATE
+---------
+ADDRESS
+--------------------------------------------------------------------------------
+     PHONE JOB_TITTLE
+---------- ----------
+      1000 noor                                                    50000
+21-FEB-99
+uttara
+1914210746 GM
+
+
+       EID ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+HIRE_DATE
+---------
+ADDRESS
+--------------------------------------------------------------------------------
+     PHONE JOB_TITTLE
+---------- ----------
+      1010 mohammad                                                45000
+21-MAR-99
+uttara
+1673470132 agm
+
+
+       EID ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+HIRE_DATE
+---------
+ADDRESS
+--------------------------------------------------------------------------------
+     PHONE JOB_TITTLE
+---------- ----------
+      1020 parvez                                                  42000
+21-FEB-99
+tongi
+1324567896 accountent
+
+
+       EID ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+HIRE_DATE
+---------
+ADDRESS
+--------------------------------------------------------------------------------
+     PHONE JOB_TITTLE
+---------- ----------
+      1030 jaker                                                   40000
+01-APR-99
+mirpur
+  17456123 amaneger
+
+
+       EID ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+HIRE_DATE
+---------
+ADDRESS
+--------------------------------------------------------------------------------
+     PHONE JOB_TITTLE
+---------- ----------
+      1040 hossin                                                  41000
+01-JUN-00
+mohakhali
+1524135689 postman
+
+
+       EID ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+HIRE_DATE
+---------
+ADDRESS
+--------------------------------------------------------------------------------
+     PHONE JOB_TITTLE
+---------- ----------
+      1050 hasann                                                  41000
+01-JUN-00
+mohakhali
+1524135689 postman
+
+
+       EID ENAME                                                  SALARY
+---------- -------------------------------------------------- ----------
+HIRE_DATE
+---------
+ADDRESS
+--------------------------------------------------------------------------------
+     PHONE JOB_TITTLE
+---------- ----------
+      1060 nanno                                                   41000
+01-JUN-00
+mohakhali
+1524135689 postman
+
+
+7 rows selected.
+
+SQL> set line 250;
+SQL> select * from emp;
+
+       EID ENAME                                                  SALARY HIRE_DATE ADDRESS
+---------- -------------------------------------------------- ---------- --------- ------------------------
+      1000 noor                                                    50000 21-FEB-99 uttara
+      1010 mohammad                                                45000 21-MAR-99 uttara
+      1020 parvez                                                  42000 21-FEB-99 tongi
+      1030 jaker                                                   40000 01-APR-99 mirpur
+      1040 hossin                                                  41000 01-JUN-00 mohakhali
+      1050 hasann                                                  41000 01-JUN-00 mohakhali
+      1060 nanno                                                   41000 01-JUN-00 mohakhali
+
+7 rows selected.
+
+SQL> select ename,job_tittle,salary,salary+salary*30/100 bonus from emp;
+
+ENAME                                              JOB_TITTLE     SALARY      BONUS
+-------------------------------------------------- ---------- ---------- ----------
+noor                                               GM              50000      65000
+mohammad                                           agm             45000      58500
+parvez                                             accountent      42000      54600
+jaker                                              amaneger        40000      52000
+hossin                                             postman         41000      53300
+hasann                                             postman         41000      53300
+nanno                                              postman         41000      53300
+
+7 rows selected.
+
+SQL> select ename,salary from emp
+  2  where salary=(select min(salary) from emp);
+
+ENAME                                                  SALARY
+-------------------------------------------------- ----------
+jaker                                                   40000
+
+SQL> update emp
+  2  set job_tittle=manager;
+set job_tittle=manager
+               *
+ERROR at line 2:
+ORA-00904: "MANAGER": invalid identifier
+
+
+SQL> update emp
+  2  set job_tittle='manager';
+
+7 rows updated.
+
+SQL> select * from emp;
+
+       EID ENAME                                                  SALARY HIRE_DATE ADDRESS
+---------- -------------------------------------------------- ---------- --------- ------------------------
+      1000 noor                                                    50000 21-FEB-99 uttara
+      1010 mohammad                                                45000 21-MAR-99 uttara
+      1020 parvez                                                  42000 21-FEB-99 tongi
+      1030 jaker                                                   40000 01-APR-99 mirpur
+      1040 hossin                                                  41000 01-JUN-00 mohakhali
+      1050 hasann                                                  41000 01-JUN-00 mohakhali
+      1060 nanno                                                   41000 01-JUN-00 mohakhali
+
+7 rows selected.
+
+SQL> set line 250
+SQL> select * from emp;
+
+       EID ENAME                                                  SALARY HIRE_DATE ADDRESS
+---------- -------------------------------------------------- ---------- --------- ------------------------
+      1000 noor                                                    50000 21-FEB-99 uttara
+      1010 mohammad                                                45000 21-MAR-99 uttara
+      1020 parvez                                                  42000 21-FEB-99 tongi
+      1030 jaker                                                   40000 01-APR-99 mirpur
+      1040 hossin                                                  41000 01-JUN-00 mohakhali
+      1050 hasann                                                  41000 01-JUN-00 mohakhali
+      1060 nanno                                                   41000 01-JUN-00 mohakhali
+
+7 rows selected.
+
+SQL> update emp
+  2  set salary=25000,job_tittle='agm'
+  3  where eid=1020;
+
+1 row updated.
+
+SQL> select * from emp;
+
+       EID ENAME                                                  SALARY HIRE_DATE ADDRESS
+---------- -------------------------------------------------- ---------- --------- ------------------------
+      1000 noor                                                    50000 21-FEB-99 uttara
+      1010 mohammad                                                45000 21-MAR-99 uttara
+      1020 parvez                                                  25000 21-FEB-99 tongi
+      1030 jaker                                                   40000 01-APR-99 mirpur
+      1040 hossin                                                  41000 01-JUN-00 mohakhali
+      1050 hasann                                                  41000 01-JUN-00 mohakhali
+      1060 nanno                                                   41000 01-JUN-00 mohakhali
+
+7 rows selected.
+
+SQL>//// again  procedure 19/9/17///
+
+SQL> conn blue/blue;
+Connected.
+SQL> create table round(round_id number(10) primary key,round_name varchar2(50));
+
+Table created.
+
+SQL> create table student(student_id number(10) primary key,studentname varchar2(50),age number(10),round_id number(10),
+  2  constraint st_fk_ro foreign key (round_id) references round(round_id));
+
+Table created.
+
+SQL> create sequence round_seq start with
+  2  500 increment by 5 nocache nocycle;
+
+Sequence created.
+
+SQL> insert into round values(round_seq.nextval,'ddl');
+
+1 row created.
+
+SQL> insert into round values(round_seq.nextval,'ppl');
+
+1 row created.
+
+SQL> insert into round values(round_seq.nextval,'tpl');
+
+1 row created.
+
+SQL> create or replace trigger student_after_insert
+  2  after inser on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('insertedddd');
+  6  end;
+  7  /
+after inser on student
+      *
+ERROR at line 2:
+ORA-04072: invalid trigger type
+
+
+SQL> create or replace trigger student_after_insert
+  2  after insert on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('insertedddd');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL>  create or replace trigger student_after_update
+  2    2  after update on student
+  3    3  for each row
+  4    4  begin
+  5    5  dbms_output.put_line('updateeed');
+  6    6  end;
+  7    7  /
+  8    7  /
+  9
+ 10
+ 11  ;
+ 12
+ 13  /
+  2  after update on student
+  *
+ERROR at line 2:
+ORA-04071: missing BEFORE, AFTER or INSTEAD OF keyword
+
+
+SQL>  create or replace trigger student_after_update
+  2    2  after update on student
+  3    3  for each row
+  4    4  begin
+  5    5  dbms_output.put_line('updateeed');
+  6    6  end;
+  7    7  /
+  8  /
+  2  after update on student
+  *
+ERROR at line 2:
+ORA-04071: missing BEFORE, AFTER or INSTEAD OF keyword
+
+
+SQL> create or replace trigger student_after_update
+  2  after update on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('updateddd');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> set serveroutput on
+SQL> insert into student values(1,'jamal',30,500);
+insertedddd
+
+1 row created.
+
+SQL> insert into student values(2,'kamal',30,510);
+insertedddd
+
+1 row created.
+
+SQL> insert into student values(3,'kamal',30,515);
+insertedddd
+insert into student values(3,'kamal',30,515)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (BLUE.ST_FK_RO) violated - parent key not found
+
+
+SQL> create view student_v as student;
+create view student_v as student
+                         *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> create view student_v as
+  2  select * from student;
+
+View created.
+
+SQL> create synonym st_view fro student_v;
+create synonym st_view fro student_v
+                       *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> create synonym st_view for student_v;
+
+Synonym created.
+
+SQL> craete or replace trigger display_age
+SP2-0734: unknown command beginning "craete or ..." - rest of line ignored.
+SQL> create or replace trigger display_age
+  2  after update on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('new age:'||:new.age);
+  6  dbms_output.put_line('old age:'||:old.age);
+  7  end;
+  8  /
+
+Trigger created.
+
+SQL> update student
+  2  set age=35
+  3  where student_id=1;
+new age:35
+old age:30
+updateddd
+
+1 row updated.
+
+SQL> set serveroutput on
+SQL> update student
+  2  set age=35
+  3  where student_id=1;
+new age:35
+old age:35
+updateddd
+
+1 row updated.
+
+SQL> set line 250
+SQL> select * from student;
+
+STUDENT_ID STUDENTNAME                                               AGE   ROUND_ID
+---------- -------------------------------------------------- ---------- ----------
+         1 jamal                                                      35        500
+         2 kamal                                                      30        510
+
+SQL> create or replace procedure getstudentbystudentid(
+  2  p_studentid in student.student_id%type,
+  3  p_studentid out student.studentname%type)
+  4  is
+  5  begin
+  6  select studentname
+  7  into p_studentname
+  8  from student where student_id=p_studentid;
+  9  end;
+ 10  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> show err;
+Errors for PROCEDURE GETSTUDENTBYSTUDENTID:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0      PL/SQL: Compilation unit analysis terminated
+1/1      PLS-00410: duplicate fields in RECORD,TABLE or argument list are
+         not permitted
+
+SQL> show user;
+USER is "BLUE"
+SQL> desc student;
+ Name                                                                                                                                    Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------- -------- ------------------------------------------------------------------------------------------------
+ STUDENT_ID                                                                                                                              NOT NULL NUMBER(10)
+ STUDENTNAME                                                                                                                                      VARCHAR2(50)
+ AGE                                                                                                                                              NUMBER(10)
+ ROUND_ID                                                                                                                                         NUMBER(10)
+
+SQL> create or replace procedure getstudentbystudentid(
+  2  p_studentid in student.student_id%type,
+  3  p_studentname out student.studentname%type)
+  4  is
+  5  begin
+  6  select studentname
+  7  into p_studentname
+  8  from student where student_id=p_studentid;
+  9  end;
+ 10  /
+
+Procedure created.
+
+SQL> declare
+  2  p_studentname student.studentname%type;
+  3  begin
+  4  getstudentbystudentid(&p_studentid,p_studentname);
+  5  dbms_output.put_line('studentname:'||p_username);
+  6  end;
+  7  /
+Enter value for p_studentid: 1
+old   4: getstudentbystudentid(&p_studentid,p_studentname);
+new   4: getstudentbystudentid(1,p_studentname);
+dbms_output.put_line('studentname:'||p_username);
+                                     *
+ERROR at line 5:
+ORA-06550: line 5, column 38:
+PLS-00201: identifier 'P_USERNAME' must be declared
+ORA-06550: line 5, column 1:
+PL/SQL: Statement ignored
+
+
+SQL> set serveroutoput on
+SP2-0735: unknown SET option beginning "serverouto..."
+SQL> set serveroutput on
+SQL> declare
+  2  p_studentname student.studentname%type;
+  3  begin
+  4  getstudentbystudentid(&p_studentid,p_studentname);
+  5  dbms_output.put_line('studentname:'||p_username);
+  6  end;
+  7  /
+Enter value for p_studentid: 1
+old   4: getstudentbystudentid(&p_studentid,p_studentname);
+new   4: getstudentbystudentid(1,p_studentname);
+dbms_output.put_line('studentname:'||p_username);
+                                     *
+ERROR at line 5:
+ORA-06550: line 5, column 38:
+PLS-00201: identifier 'P_USERNAME' must be declared
+ORA-06550: line 5, column 1:
+PL/SQL: Statement ignored
+
+
+SQL> declare
+  2  p_studentname student.studentname%type;
+  3  begin
+  4  getstudentbystudentid(&p_studentid,p_studentname);
+  5  dbms_output.put_line('studentname:'||p_studentname);
+  6  end;
+  7  /
+Enter value for p_studentid: 1
+old   4: getstudentbystudentid(&p_studentid,p_studentname);
+new   4: getstudentbystudentid(1,p_studentname);
+studentname:jamal
+
+PL/SQL procedure successfully completed.
+
+SQL>

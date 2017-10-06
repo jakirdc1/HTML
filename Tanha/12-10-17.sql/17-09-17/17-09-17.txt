@@ -1,0 +1,261 @@
+create or replace trigger student1_after_insert
+after insert on student1
+for each row
+begin
+dbms_output.put_line('inserted');
+end;
+/
+
+
+create or replace trigger student1_after_update
+after update on student1
+for each row
+begin
+dbms_output.put_line('inserted');
+end;
+/
+
+
+  create or replace trigger student1_after_delete
+after delete on student1
+for each row
+begin
+dbms_output.put_line('deleted');
+end;
+/
+///Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+D:\Users\J2EE-33\Desktop\12-10-17>sql plus
+'sql' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\Users\J2EE-33\Desktop\12-10-17>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sun Sep 17 09:04:21 2017
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> conn parvez/parvez
+Connected.
+SQL> create table round1(round_id number(10) primary key,round_name varchar2(50));
+
+Table created.
+
+SQL> create table student1(student_id number(10) primary key,student_name varchar2(50),age number(10
+  2  constraint round_fk_st foreign key( references
+  3
+SQL> create table student1(student_id number(10) primary key,student_name varchar2(50),age number(10
+  2  constraint round_fk_st foreign key (round_id) references round1(round_id);
+constraint round_fk_st foreign key (round_id) references round1(round_id)
+                                                                        *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table student1(student_id number(10) primary key,student_name varchar2(50),age number(10
+  2  constraint round_fk_st foreign key (round_id) references round1(round_id);
+constraint round_fk_st foreign key (round_id) references round1(round_id)
+                                                                        *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table student1(student_id number(10) primary key,student_name varchar2(50),age number(10
+  2  constraint round_fk_st foreign key (round_id) references round1(round_id));
+
+Table created.
+
+SQL> create sequence round1_seq start with 1000 increment by 10 nocache nocycle;
+
+Sequence created.
+
+SQL> insert into round1 values(round1_seq.nextval,'java');
+
+1 row created.
+
+SQL> insert into round1 values(round1_seq.nextval,'wps');
+
+1 row created.
+
+SQL> insert into round1 values(round1_seq.nextval,'dbms');
+
+1 row created.
+
+SQL> create or replace trigger student1_after_insert after insert on student1 for each row
+  2  declare
+  3  begin
+  4  insert into student1
+  5  dbms_output.put_line('insert succesesfully');
+  6  end;
+  7  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> create or replace trigger student1_after_insert after insert on student1 for each row
+  2  declare
+  3  begin
+  4  insert into student1
+  5  dbms_output.put_line('Insert succesesfully');
+  6  end;
+  7  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> set serveroutput on
+SQL> create or replace trigger student1_after_insert after insert on student1 for each row
+  2  declare
+  3  begin
+  4  insert into student1
+  5  dbms_output.put_line('Insert succesess fully');
+  6  end;
+  7  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> conn parvez/parvez;
+Connected.
+SQL> create or replace trigger student1_insert after insert on student1 for each rowch
+  2  declare
+  3  begin
+  4  insert into student1
+  5  dbms_output.put_line('Insert succesess fully');
+  6  end;
+  7  /
+create or replace trigger student1_insert after insert on student1 for each rowch
+                                                                            *
+ERROR at line 1:
+ORA-01912: ROW keyword expected
+
+
+SQL> create or replace trigger student1_insert after insert on student1 for each row
+  2  declare
+  3  begin
+  4  insert into student1
+  5  dbms_output.put_line('Insert succesess fully');
+  6  end;
+  7  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> create or replace trigger student1_after_insert
+  2  after insert on student1
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('inserted');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> create or replace trigger student1_after_update
+  2  after update on student1
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('updated');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL>  create or replace trigger student1_after_delete
+  2  after delete on student1
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('deleted');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> insert into student1 values(101,'parvez',25,1000);
+insert into student1 values(101,'parvez',25,1000)
+            *
+ERROR at line 1:
+ORA-04098: trigger 'PARVEZ.STUDENT1_INSERT' is invalid and failed re-validation
+
+
+SQL> desc student;
+ERROR:
+ORA-04043: object student does not exist
+
+
+SQL> desc student1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_ID                                NOT NULL NUMBER(10)
+ STUDENT_NAME                                       VARCHAR2(50)
+ AGE                                                NUMBER(10)
+ ROUND_ID                                           NUMBER(10)
+
+SQL> insert into student1 values(101,'parvez',25,1000);
+insert into student1 values(101,'parvez',25,1000)
+            *
+ERROR at line 1:
+ORA-04098: trigger 'PARVEZ.STUDENT1_INSERT' is invalid and failed re-validation
+
+
+SQL> insert into student1
+  2  values(101,'zakir',25,1000);
+insert into student1
+            *
+ERROR at line 1:
+ORA-04098: trigger 'PARVEZ.STUDENT1_INSERT' is invalid and failed re-validation
+
+
+SQL> select * from round1;
+
+  ROUND_ID ROUND_NAME
+---------- --------------------------------------------------
+      1000 java
+      1010 wps
+      1020 dbms
+
+SQL> insert into student1
+  2  values(101,'zakir',25,1000);
+insert into student1
+            *
+ERROR at line 1:
+ORA-04098: trigger 'PARVEZ.STUDENT1_INSERT' is invalid and failed re-validation
+
+
+SQL> select * from student1;
+
+no rows selected
+
+SQL> set serveroutput on;
+SQL>
+SQL> inssert into student1 values(1,'rahim',20,1000);
+SP2-0734: unknown command beginning "inssert in..." - rest of line ignored.
+SQL> select * from round;
+
+  ROUND_ID ROUND_NAME
+---------- --------------------------------------------------
+      5001 j2ee
+      5011 wps
+      5021 ddbm
+
+SQL> select * from round1;
+
+  ROUND_ID ROUND_NAME
+---------- --------------------------------------------------
+      1000 java
+      1010 wps
+      1020 dbms
+
+SQL> insert into student1 values(10,'java',50,1000);
+insert into student1 values(10,'java',50,1000)
+            *
+ERROR at line 1:
+ORA-04098: trigger 'PARVEZ.STUDENT1_INSERT' is invalid and failed re-validation
+
+
+SQL>
+
+

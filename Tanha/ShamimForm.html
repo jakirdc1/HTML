@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Form</title>
+<style>
+	h2{
+		color: red;
+		font-size:70px;
+		}
+</style>
+</head>
+
+<body>
+	<form name="myForm">
+    	Full Name: <input type="text" name="fullName">
+        Gender: 
+        <input type="radio" name="gender" value="Male">Male
+        <input type="radio" name="gender" value="Female">Female
+        <button type="reset">Reset</button>
+    </form>
+    <button type="submit" onClick="display()">Submit</button><hr>
+    
+    
+    <h2 id="urmi"></h2>
+    <h2 id="urmi2"></h2>
+    
+    
+    <script>
+    	function display(){
+			var x = document.forms.myForm.fullName.value;
+			document.getElementById("urmi").innerHTML="Your name is: "+x;
+			
+			var x1 = document.forms.myForm.gender.value;
+			document.getElementById("urmi2").innerHTML="Your gender is: "+x1;
+			
+			
+			}
+    </script>
+</body>
+</html>

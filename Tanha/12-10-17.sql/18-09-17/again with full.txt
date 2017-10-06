@@ -1,0 +1,300 @@
+ 2  ?
+ 3  /
+
+
+RROR at line 2:
+RA-00911: invalid character
+
+
+QL>  create table round(round_id number(5) primary key,round_name varchar2(50));
+
+able created.
+
+QL> create table student(student_id number(5) primary key,student_name varchar2(50),age number(10),round_id number(5),
+ 2  constraint st_fk_rd foreign key (round_id) references round(roun_id));
+onstraint st_fk_rd foreign key (round_id) references round(roun_id))
+                                                           *
+RROR at line 2:
+RA-00904: "ROUN_ID": invalid identifier
+
+
+QL> create table student(student_id number(5) primary key,student_name varchar2(50),age number(10),round_id number(5),
+ 2  constraint st_fk_rd foreign key (round_id) references round(round_id));
+
+able created.
+
+QL> create sequence round_seq start with 100 increment by 10 nocache nocycle;
+
+equence created.
+
+QL> insert into round values(round_seq.nextval,'c++');
+
+ row created.
+
+QL> insert into round values(round_seq.nextval,'wps');
+
+ row created.
+
+QL> create or replace trriger student_after_insert
+ 2  after insert on student
+ 3  for each row
+ 4  begin
+ 5  dbms_output.put_line('inserteddd');
+reate or replace trriger student_after_insert
+                 *
+RROR at line 1:
+RA-00922: missing or invalid option
+
+
+QL> create or replace trriger student_after_insert
+ 2  after insert on student
+ 3  for each row
+ 4  begin
+ 5  dbms_output.put_line('inserteddd');
+reate or replace trriger student_after_insert
+                 *
+RROR at line 1:
+RA-00922: missing or invalid option
+
+
+QL> create or replace trriger after_insert
+ 2  after insert on student
+ 3  for each row
+ 4  begin
+ 5  dbms_output.put_line('inserteed');
+reate or replace trriger after_insert
+                 *
+RROR at line 1:
+RA-00922: missing or invalid option
+
+
+QL> end;
+P2-0042: unknown command "end" - rest of line ignored.
+QL> /create or replace trigger after_insert
+P2-0734: unknown command beginning "/create or..." - rest of line ignored.
+QL> after insert on student
+P2-0734: unknown command beginning "after inse..." - rest of line ignored.
+QL> for each row
+P2-0734: unknown command beginning "for each r..." - rest of line ignored.
+P2-0044: For a list of known commands enter HELP
+nd to leave enter EXIT.
+QL> begin
+ 2  dbms_output.put_line('inserteed');
+ 3  end;
+ 4  /
+
+L/SQL procedure successfully completed.
+
+QL>
+QL> create or replace trigger student_after_insert
+ 2  after insert on student
+ 3  for each row
+ 4  begin
+ 5  dbms_output.put_line('inserteed');
+ 6  end;
+ 7  /
+
+rigger created.
+
+QL> create or replace trigger student_after_update
+ 2  after updateon student
+ 3  for each row
+ 4  begin
+ 5  dbms_output.put_line('updateeed');
+ 6  end;
+ 7  /
+fter updateon student
+     *
+RROR at line 2:
+RA-04072: invalid trigger type
+
+
+QL> create or replace trigger student_after_update
+ 2  after update on student
+ 3  for each row
+ 4  begin
+ 5  dbms_output.put_line('updateeed');
+ 6  end;
+ 7  /
+
+rigger created.
+
+QL>
+QL> create or replace trigger student_after_delete
+ 2  after delete on student
+ 3  for each row
+ 4  begin
+ 5  dbms_output.put_line('deleteeeed');
+ 6  end;
+ 7  /
+
+rigger created.
+
+QL> inser into student values(10,rumi,25,100);
+P2-0734: unknown command beginning "inser into..." - rest of line ignored.
+QL> insert into student values(10,rumi,25,100);
+nsert into student values(10,rumi,25,100)
+                             *
+RROR at line 1:
+RA-00984: column not allowed here
+
+
+QL>
+QL> insert into student values(10,'rumi',25,100);
+
+ row created.
+
+QL>
+QL> insert into student values(20,'youns',25,110);
+
+ row created.
+
+QL>  update student set student_id=11 where student_id=20;
+
+ row updated.
+
+QL>
+QL> create view student_v as
+ 2    select * from student;
+
+iew created.
+
+QL> create synonym st_view for student_v;
+
+ynonym created.
+
+QL> SQL> create or replace trigger display_age
+P2-0734: unknown command beginning "SQL> creat..." - rest of line ignored.
+QL>   2  after update on student
+QL>   3  for each row
+QL>   4  begin
+QL>   5  dbms_output.put_line('new age:'||:new.age);
+QL>   6  dbms_output.put_line('old age:'||:old.age);
+QL>   7  end;
+QL>   8  /
+QL>
+QL>
+QL>
+QL>  create or replace trigger display_age
+ 2  after update on student
+ 3   for each row
+ 4  begin
+ 5  dbms_output.put_line('new age:'||:new.age);
+ 6   dbms_output.put_line('old age:'||:old.age);
+ 7  end;
+ 8  /
+
+rigger created.
+
+QL> update student
+ 2  set age=30
+ 3  where student_id=10;
+
+ row updated.
+
+QL> set serveroutput on;
+QL> update student
+ 2  set age=30
+ 3  where student_id=10;
+ew age:30
+ld age:30
+pdateeed
+
+ row updated.
+
+QL> create user red identified by red;
+
+ser created.
+
+QL> grant dba to red;
+
+rant succeeded.
+
+QL> create table student(user_id number(5),username varchar2(50));
+reate table student(user_id number(5),username varchar2(50))
+            *
+RROR at line 1:
+RA-00955: name is already used by an existing object
+
+
+QL> conn red/red;
+onnected.
+QL> create table student(user_id number(5),username varchar2(50));
+
+able created.
+
+QL> create or replace procedure getstudentbyuserid(
+ 2  p_userid in student.user_id%type,
+ 3  p_username out student.username%type)
+ 4  is
+ 5  begin
+ 6  select username
+ 7  into p_username
+ 8  from student where user_id=p_userid;
+ 9  end;
+10  /
+
+rocedure created.
+
+QL> insert into student values(10,'rumi');
+
+ row created.
+
+QL> insert into student values(20,'moni');
+
+ row created.
+
+QL> p_username student.username%type;
+P2-0734: unknown command beginning "p_username..." - rest of line ignored.
+QL> p_username student.username%type;
+P2-0734: unknown command beginning "p_username..." - rest of line ignored.
+QL> declare
+ 2  p_username student.username%type;
+ 3  begin
+ 4  getstudentbyuserid(&p_userid,p_username);
+ 5  dbms_output.put_line('username :'||p_username);
+ 6  end;
+ 7  /
+nter value for p_userid: 10
+ld   4: getstudentbyuserid(&p_userid,p_username);
+ew   4: getstudentbyuserid(10,p_username);
+
+L/SQL procedure successfully completed.
+
+QL>
+QL>  declare
+ 2   p_username student.username%type;
+ 3   begin
+ 4   getstudentbyuserid(&p_userid,p_username);
+ 5   dbms_output.put_line('username :'||p_username);
+ 6   end;
+ 7   /
+nter value for p_userid: 20
+ld   4:  getstudentbyuserid(&p_userid,p_username);
+ew   4:  getstudentbyuserid(20,p_username);
+
+L/SQL procedure successfully completed.
+
+QL> set serveroutput on;
+QL>
+QL>
+QL>  declare
+ 2   p_username student.username%type;
+ 3   begin
+ 4   getstudentbyuserid(&p_userid,p_username);
+ 5   dbms_output.put_line('username :'||p_username);
+ 6   end;
+ 7   /
+nter value for p_userid: 10
+ld   4:  getstudentbyuserid(&p_userid,p_username);
+ew   4:  getstudentbyuserid(10,p_username);
+sername :rumi
+
+L/SQL procedure successfully completed.
+
+QL>
+QL>
+QL>
+QL> 20
+P2-0226: Invalid line number
+QL>

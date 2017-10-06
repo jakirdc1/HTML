@@ -1,0 +1,36 @@
+create user urm identified by urm;
+
+grant dba to urm;
+
+--2.
+create table emp
+(eid number(2) primary key,
+ename varchar2(25),
+salary number(10),
+hire_date date,
+adress varchar2(25));
+
+--3.
+alter table emp
+add (phone number(11),
+job_title varchar2(30));
+
+--4.
+insert into emp
+(eid,ename,salary,hire_date,adress,phone,job_title)
+values(&eid,'&ename',&salary,'&hire_date','&adress',&phone,'&job_title');
+
+--6.
+select ename,job_title,salary,salary+salary*30/100 bonus from emp;
+
+--7.
+select ename,salary from emp where salary=(select min(salary) from emp);
+
+--8.
+update emp
+set job_title = 'manager';
+
+--9.
+update emp
+set salary=26000,job_title='sr. software engineer'
+where eid = 30;

@@ -1,0 +1,338 @@
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+D:\Users\J2EE-33\Desktop\12-10-17.sql>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Sep 18 11:50:14 2017
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: sys as sysdba;
+SP2-0306: Invalid option.
+Usage: CONN[ECT] [{logon|/|proxy} [AS {SYSDBA|SYSOPER|SYSASM}] [edition=value]]
+where <logon> ::= <username>[/<password>][@<connect_identifier>]
+      <proxy> ::= <proxyuser>[<username>][/<password>][@<connect_identifier>]
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> set serveroutout on
+SP2-0735: unknown SET option beginning "serverouto..."
+SQL> set serveroutout on;
+SP2-0735: unknown SET option beginning "serverouto..."
+SQL> set serveroutput on;
+SQL> create user green identified by green;
+
+User created.
+
+SQL> grant dba to green;
+
+Grant succeeded.
+
+SQL> conn green/green;
+Connected.
+SQL> create table student(student_id number(5) primary key,student_name varchar2(50),age number(10),
+  2  ?
+  3  /
+?
+*
+ERROR at line 2:
+ORA-00911: invalid character
+
+
+SQL>  create table round(round_id number(5) primary key,round_name varchar2(50));
+
+Table created.
+
+SQL> create table student(student_id number(5) primary key,student_name varchar2(50),age number(10),round_id number(5),
+  2  constraint st_fk_rd foreign key (round_id) references round(roun_id));
+constraint st_fk_rd foreign key (round_id) references round(roun_id))
+                                                            *
+ERROR at line 2:
+ORA-00904: "ROUN_ID": invalid identifier
+
+
+SQL> create table student(student_id number(5) primary key,student_name varchar2(50),age number(10),round_id number(5),
+  2  constraint st_fk_rd foreign key (round_id) references round(round_id));
+
+Table created.
+
+SQL> create sequence round_seq start with 100 increment by 10 nocache nocycle;
+
+Sequence created.
+
+SQL> insert into round values(round_seq.nextval,'c++');
+
+1 row created.
+
+SQL> insert into round values(round_seq.nextval,'wps');
+
+1 row created.
+
+SQL> create or replace trriger student_after_insert
+  2  after insert on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('inserteddd');
+create or replace trriger student_after_insert
+                  *
+ERROR at line 1:
+ORA-00922: missing or invalid option
+
+
+SQL> create or replace trriger student_after_insert
+  2  after insert on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('inserteddd');
+create or replace trriger student_after_insert
+                  *
+ERROR at line 1:
+ORA-00922: missing or invalid option
+
+
+SQL> create or replace trriger after_insert
+  2  after insert on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('inserteed');
+create or replace trriger after_insert
+                  *
+ERROR at line 1:
+ORA-00922: missing or invalid option
+
+
+SQL> end;
+SP2-0042: unknown command "end" - rest of line ignored.
+SQL> /create or replace trigger after_insert
+SP2-0734: unknown command beginning "/create or..." - rest of line ignored.
+SQL> after insert on student
+SP2-0734: unknown command beginning "after inse..." - rest of line ignored.
+SQL> for each row
+SP2-0734: unknown command beginning "for each r..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> begin
+  2  dbms_output.put_line('inserteed');
+  3  end;
+  4  /
+
+PL/SQL procedure successfully completed.
+
+SQL>
+SQL> create or replace trigger student_after_insert
+  2  after insert on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('inserteed');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> create or replace trigger student_after_update
+  2  after updateon student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('updateeed');
+  6  end;
+  7  /
+after updateon student
+      *
+ERROR at line 2:
+ORA-04072: invalid trigger type
+
+
+SQL> create or replace trigger student_after_update
+  2  after update on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('updateeed');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL>
+SQL> create or replace trigger student_after_delete
+  2  after delete on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('deleteeeed');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> inser into student values(10,rumi,25,100);
+SP2-0734: unknown command beginning "inser into..." - rest of line ignored.
+SQL> insert into student values(10,rumi,25,100);
+insert into student values(10,rumi,25,100)
+                              *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL>
+SQL> insert into student values(10,'rumi',25,100);
+
+1 row created.
+
+SQL>
+SQL> insert into student values(20,'youns',25,110);
+
+1 row created.
+
+SQL>  update student set student_id=11 where student_id=20;
+
+1 row updated.
+
+SQL>
+SQL> create view student_v as
+  2    select * from student;
+
+View created.
+
+SQL> create synonym st_view for student_v;
+
+Synonym created.
+
+SQL> SQL> create or replace trigger display_age
+SP2-0734: unknown command beginning "SQL> creat..." - rest of line ignored.
+SQL>   2  after update on student
+SQL>   3  for each row
+SQL>   4  begin
+SQL>   5  dbms_output.put_line('new age:'||:new.age);
+SQL>   6  dbms_output.put_line('old age:'||:old.age);
+SQL>   7  end;
+SQL>   8  /
+SQL>
+SQL>
+SQL>
+SQL>  create or replace trigger display_age
+  2  after update on student
+  3   for each row
+  4  begin
+  5  dbms_output.put_line('new age:'||:new.age);
+  6   dbms_output.put_line('old age:'||:old.age);
+  7  end;
+  8  /
+
+Trigger created.
+
+SQL> update student
+  2  set age=30
+  3  where student_id=10;
+r
+
+
+
+
+
+1 row updated.
+
+SQL> set serveroutput on;
+SQL> update student
+  2  set age=30
+  3  where student_id=10;
+new age:30
+old age:30
+updateeed
+
+1 row updated.
+
+SQL> create user red identified by red;
+
+User created.
+
+SQL> grant dba to red;
+
+Grant succeeded.
+
+SQL> create table student(user_id number(5),username varchar2(50));
+create table student(user_id number(5),username varchar2(50))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> conn red/red;
+Connected.
+SQL> create table student(user_id number(5),username varchar2(50));
+
+Table created.
+
+SQL> create or replace procedure getstudentbyuserid(
+  2  p_userid in student.user_id%type,
+  3  p_username out student.username%type)
+  4  is
+  5  begin
+  6  select username
+  7  into p_username
+  8  from student where user_id=p_userid;
+  9  end;
+ 10  /
+
+Procedure created.
+
+SQL> insert into student values(10,'rumi');
+
+1 row created.
+
+SQL> insert into student values(20,'moni');
+
+1 row created.///
+
+SQL> p_username student.username%type;
+SP2-0734: unknown command beginning "p_username..." - rest of line ignored.
+SQL> p_username student.username%type;
+SP2-0734: unknown command beginning "p_username..." - rest of line ignored.
+SQL> declare
+  2  p_username student.username%type;
+  3  begin
+  4  getstudentbyuserid(&p_userid,p_username);
+  5  dbms_output.put_line('username :'||p_username);
+  6  end;
+  7  /
+Enter value for p_userid: 10
+old   4: getstudentbyuserid(&p_userid,p_username);
+new   4: getstudentbyuserid(10,p_username);
+
+PL/SQL procedure successfully completed.
+
+SQL>
+SQL>  declare
+  2   p_username student.username%type;
+  3   begin
+  4   getstudentbyuserid(&p_userid,p_username);
+  5   dbms_output.put_line('username :'||p_username);
+  6   end;
+  7   /
+Enter value for p_userid: 20
+old   4:  getstudentbyuserid(&p_userid,p_username);
+new   4:  getstudentbyuserid(20,p_username);
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL>
+SQL>
+SQL>  declare
+  2   p_username student.username%type;
+  3   begin
+  4   getstudentbyuserid(&p_userid,p_username);
+  5   dbms_output.put_line('username :'||p_username);
+  6   end;
+  7   /
+Enter value for p_userid: 10
+old   4:  getstudentbyuserid(&p_userid,p_username);
+new   4:  getstudentbyuserid(10,p_username);
+username :rumi
+
+PL/SQL procedure successfully completed.
+
+
+
+

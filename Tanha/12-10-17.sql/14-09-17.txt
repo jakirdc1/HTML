@@ -1,0 +1,79 @@
+
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+D:\Users\J2EE-33\Desktop\12-10-17>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Sep 14 09:30:44 2017
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+
+SQL> conn parvez/parvez;
+Connected.
+SQL> create table usa(usa_id number(10),f_name varchar2(50),l_name varchar2(50),);
+create table usa(usa_id number(10),f_name varchar2(50),l_name varchar2(50),)
+                                                                           *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> create table usa(usa_id number(10),f_name varchar2(50),l_name varchar2(50));
+
+Table created.
+
+SQL> create table usa_backup
+  2  as select * from usa;
+
+Table created.
+
+SQL> set server output on;
+SP2-0158: unknown SET option "server"
+SQL> set serveroutput on;
+
+SQL> create or replace trigger usa_after_insert
+  2  after insert on usa
+  3  for each row
+  4  declare
+  5
+  6  begin
+  7  insert into usa_backup
+  8  values(:new.usa_id,:new.f_name,:new.l_name);
+  9  dbms_output.put_line('Record insert on table usa');
+ 10  end;
+ 11  /
+
+Trigger created.
+
+SQL> insert into usa
+  2  values(501,'nur','mohammad');
+Record insert on table usa
+
+1 row created.
+
+SQL> insert into usa
+  2  values(502,'amin','uddin');
+Record insert on table usa
+
+1 row created.
+
+SQL> insert into usa
+  2  values(503,'parvin','akter');
+Record insert on table usa
+
+1 row created.
+
+SQL> set line 250;
+SQL> select * from usa_backup;
+
+    USA_ID F_NAME                                             L_NAME
+---------- -------------------------------------------------- --------------------------------------------------
+       501 nur                                                mohammad
+       502 amin                                               uddin
+       503 parvin                                             akter
+
+SQL>

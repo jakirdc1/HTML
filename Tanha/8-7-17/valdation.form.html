@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>form</title>
+</head>
+<body>
+plese input a number between 1 and 10: 
+<input id="numb"><br>
+<button type="button" onClick="myFunction()">submit</button>
+<p id="demo"></p>
+<script>
+
+
+function myFunction(){
+	var x, text;
+	
+	
+	x=document.getElementById("numb").value;
+	
+	if(isNaN(x) || x<1 || x>10){
+		
+		text="Input not valid";
+		
+		}else{
+		text="Input valid";	
+			
+			}
+			document.getElementById("demo").innerHTML=text;
+		
+	
+	}
+</script>
+
+</body>
+</html>
+</body>
+</html>

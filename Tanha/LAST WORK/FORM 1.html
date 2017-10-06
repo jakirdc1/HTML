@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>FOR</title>
+<script>
+var win;
+function openWindow(){
+win=window.open("","", "width=500");
+win.document.write("<h1>Output Window</h1>");
+              }
+			  
+function closeWindow(){	
+
+			win.close();
+	
+				}
+				
+function add(){	
+	with(document){
+		
+var x1=getElementById("name").value;
+
+	if(x1.length==0 || x1.length>15){
+	
+	alert("name is must be 1 to 15 character.");	
+		
+		}
+var x2=getElementById("number").value;
+
+var x3=getElementById("phonenumber").value; 
+if(x3.length != 11){
+	alert("Your mobile number is not correct.");
+	return;
+	}
+	
+
+var x4=getElementById("emailad").value;	
+
+var i=x4.indexOf('@');
+var j=x4.lastIndexOf('.');
+	if(i>0 && i<j-1){
+		
+		alert("valid is email");
+		}else{
+		alert("Invalid is email");	
+		
+		return;
+			}
+		
+var x5=getElementById("pword").value;
+		if(x5.length<=5){
+			
+		alert("password is must be less than 5 character.");	
+		return;
+			}
+			
+var x6="";
+ if(getElementById("reading").checked)			
+	x6+="Read";
+	
+ if(getElementById("writing").checked)			
+	x6+="Write";
+
+ if(getElementById("playing").checked)			
+	x6+="Play";
+	
+var x7=myForm.gender.value;	
+
+
+var x8=getElementById("country").value;
+
+
+
+win.document.write("Your name is:"+x1+"<br/>");
+win.document.write("Your id is:"+x2+"<br/>");
+win.document.write("Your phone is:"+x3+"<br/>");
+win.document.write("Your email is:"+x4+"<br/>");
+win.document.write("Your password is:"+x5+"<br/>");
+win.document.write("Your hobby is:"+x6+"<br/>");
+win.document.write("Your gender is:"+x7+"<br/>");
+win.document.write("Your country is:"+x8+"<br/>");		
+		}
+
+			}					  			  
+</script>
+
+
+
+</head>
+
+<body>
+<form id="myForm">
+<pre>
+Name:
+<input type="text" id="name"><br/>
+
+Id:
+<input type="text" id="number"><br/>
+
+
+Phone:
+<input type="text" id="phonenumber"><br/>
+
+
+Email:
+<input type="email" id="emailad"><br/>
+
+
+Password:
+<input type="password" id="pword"><br/>
+
+
+Hobbyy:
+<input type="checkbox" id="reading">Read
+<input type="checkbox" id="writing">Write
+<input type="checkbox" id="playing">Play<br/>
+
+
+Gender:
+<input type="radio" name="gender" value="male">Male
+<input type="radio" name="gender" value="female">Female<br/>
+
+
+Country:
+<select id="country">
+<option value="Bangladesh">Bangladesh</option>
+<option value="Pakistan">Pakistan</option>
+<option value="Nepal">Nepal</option>
+</select>
+
+
+
+</pre>
+</form>
+
+<button onClick="openWindow()">open Window</button>
+
+<button onClick="add()">add</button>
+
+<button onClick="closeWindow()">close Window</button>
+</body>
+</html>

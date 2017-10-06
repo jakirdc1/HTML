@@ -1,0 +1,187 @@
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+D:\Users\J2EE-33\Desktop\12-10-17.sql\18-09-17>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on Tue Sep 19 12:28:49 2017
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> create user black identified by blacj;
+
+User created.
+
+SQL> grant dba to black;
+
+Grant succeeded.
+
+SQL> conn black/black;
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> conn black/black;
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+SQL> conn blacj/blacj;
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+SQL> conn black/blacj;
+Connected.
+SQL> create table student(user_id number(5),username varchar2(50));
+
+Table created.
+
+SQL> insert into student values(10,'parvez',35);
+insert into student values(10,'parvez',35)
+            *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> insert into student values(10,'parvez');
+
+1 row created.
+
+SQL> insert into student values(20,'parvez2');
+
+1 row created.
+
+SQL> create or replace trigger student_after_insert
+  2  after insert on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('inserteeddd');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> inset into student values(30,'parvez3');
+SP2-0734: unknown command beginning "inset into..." - rest of line ignored.
+SQL> insert into student values(30,'parvez3');
+
+1 row created.
+
+SQL> insert into student values(40,'parvez3');
+
+1 row created.
+
+SQL> set serveroutput on
+SQL> insert into student values(50,'parve53');
+inserteeddd
+
+1 row created.
+
+SQL>
+SQL> create or replace procedure getstudentbyuserid(
+  2  p_userid in student.user_id%type,
+  3  p_username out student.username%type)
+  4  is
+  5  begin
+  6  select username
+  7  into p_username
+  8  from student where user_id=p_userid;
+  9  end;
+ 10  /
+
+Procedure created.
+
+SQL> declare
+  2  p_username student.username%type;
+  3  begin
+  4  getstudentbyuserid(&p_userid,p_username);
+  5  dbms_output.put_line('username:'||p_username);
+  6  end;
+  7  /
+Enter value for p_userid: 10
+old   4: getstudentbyuserid(&p_userid,p_username);
+new   4: getstudentbyuserid(10,p_username);
+username:parvez
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  p_username student.username%type;
+  3  begin
+  4  getstudentbyuserid(&p_userid,p_username);
+  5  dbms_output.put_line('username:'||p_username);
+  6  end;
+  7  /
+Enter value for p_userid: 20
+old   4: getstudentbyuserid(&p_userid,p_username);
+new   4: getstudentbyuserid(20,p_username);
+username:parvez2
+
+PL/SQL procedure successfully completed.
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

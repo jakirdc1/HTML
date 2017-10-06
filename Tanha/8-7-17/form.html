@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Form</title>
+<script>
+function displayFormData(){
+	var id=document.forms['myForm']['id'].value;
+	document.getElementById("demo").innerHTML=id;
+//for name
+	
+	var name=document.forms['myForm']['fullname'].value;
+	document.getElementById("demoname").innerHTML=name;
+//for round
+		
+	var round=document.forms['myForm']['round'].value;
+	document.getElementById("demoround").innerHTML=round;
+	//for gender
+		
+	var gender=document.forms['myForm']['gender'].value;
+	document.getElementById("demogender").innerHTML=gender;
+	//for feell
+	
+	var feel=document.forms['myForm']['feel'].value;
+	document.getElementById("demofeel").innerHTML=feel;
+	}
+
+
+</script>
+
+
+</head>
+
+<body>
+<form name="myForm">
+ID:
+<input type="number" name="id"/><br/>
+Name:
+<input type="text" name="fullname"><br>
+Round:
+<select name="round">
+  <option value="32">32</option>
+   <option value="33">33</option>
+    <option value="34">34</option>
+</select><br>
+Gender:
+<input type="radio" name="gender" value="male"/>Male
+<input type="radio" name="gender" value="female"/>Female<br>
+
+How do You feel:
+<input type="text" name="feel"/>
+
+
+
+</form>
+
+<button type="reset" value="reset">Reset</button>
+<button type="submit" onClick="displayFormData()">Submit</button><br>
+
+
+
+
+ID:<p id="demo"></p>
+Name:<p id="demoname"></p>
+Round:<p id="demoround"></p>
+Gender:<p id="demogender"></p>
+Feel:<p id="demofeel"></p>
+
+
+
+</body>
+</html>

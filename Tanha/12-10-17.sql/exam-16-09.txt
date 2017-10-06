@@ -1,0 +1,148 @@
+1. create user
+
+create user bduser identified by bduser;
+grant dba to bduser;
+
+2. 
+	i) Create sequence
+	create sequence roundSeq
+	start with 10
+	increment by 10;
+
+3. Create Table
+
+round
+
+create table round(
+roundID number(3) primary key,
+roundName varchar2(15)
+
+student
+
+create table student(
+roundID number(3) primary key,
+studentName varchar2(15),
+age number(3)
+)
+
+insert data
+insert into round values (roundSeq.nextval, 'Round-33');
+
+insert into round values (roundSeq.nextval, 'Round-34');
+
+insert into round values (roundSeq.nextval, 'Round-35');
+
+insert into round values (roundSeq.nextval, 'Round-35');
+
+Create trigger in student table
+
+i)insert
+
+create or replace trigger round_after_insert
+after insert on student
+for each row
+begin
+dbms_output.put_line('Record adder in student table');
+end;
+ 
+insert into student values(roundSeq.nextval, 'Ruhul', 28);
+
+ii)update
+
+create or replace trigger round_after_update
+after update on student
+for each row
+begin
+dbms_output.put_line('Record Update in student table');
+end;
+
+update student set studentName = 'Ruhul Amin' where roundID = 10;
+
+
+iii) delete
+
+create or replace trigger round_after_delete
+after delete on student
+for each row
+begin
+dbms_output.put_line('Record adder in student table');
+end;
+
+
+4. 
+i)Create view
+
+create view student_view as select * from student;
+
+ii)Create synonym 
+
+
+
+
+
+6.
+create or replace trigger student_after_update
+after update on student
+for each row
+begin
+update student
+set age = :new.age
+where age = :old.age;
+dbms_output.put_line('Old age is : ' ||:old.age);
+dbms_output.put_line('New age is : ' ||:new.age);
+end;
+
+student backup
+
+{
+create or replace trigger student_after_update
+after update on student
+for each row
+begin
+update student_backup
+set age = :new.age
+where age = :old.age;
+dbms_output.put_line('Old age is : ' ||:old.age);
+dbms_output.put_line('New age is : ' ||:new.age);
+end;
+
+}
+
+
+update student set age = 80 where roundID = 40;
+
+
+
+Primeeee
+
+declare 
+i number(3);
+j number(3);
+begin
+ i := 2;
+ loop
+  j := 2;
+  loop
+   exit when ((mod(i,j) = 0) or (j=i));
+   j := j+1;
+  end loop;
+ if(j = i)then
+  dbms_output.put_line(i || ' : is a prime');
+ end if;
+ i := i+1;
+ exit when i = 50;
+ end loop;
+end;
+ 
+
+
+
+
+
+
+
+
+
+
+
+

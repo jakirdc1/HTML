@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>FORM</title>
+
+<script>
+function displayFormData(){
+var fn=document.forms['myForm']['fname'].value;
+var ln=document.forms['myForm']['lname'].value;
+var fullName=fn+" "+ln;
+document.getElementById('demo').innerHTML=fullName;
+//for id
+
+var id=document.forms['myForm']['id'].value;
+document.getElementById('demo1').innerHTML=id;	
+	//for gender
+	
+var gender=document.forms['myForm']['gender'].value;
+document.getElementById('demo2').innerHTML=gender;
+//for hobby	
+var hobbies=document.forms[0];
+var hob=" ";
+for(i=0; i<hobbies.length; i++){
+	if(hobbies[i].checked){
+		 hob=hob+hobbies[i].value+", ";
+		
+		}
+	}
+
+document.getElementById('demo3').innerHTML=hob;	
+//for masseges
+
+var masseage=document.forms['myForm']['masseage'].value;
+document.getElementById('demo4').innerHTML=masseage;	
+	//for country
+
+
+var country=document.forms['myForm']['country'].value;
+document.getElementById('demo5').innerHTML=country;	
+	
+	}
+
+</script>
+</head>
+
+<body>
+<form name="myForm">
+<fieldset>
+<legend>Form</legend>
+First Name:
+     <input type="text" id="fname">
+Last Name:
+   <input type="text" id="lname"><br>
+ID  :
+    <input type="text" name="id"><br>
+Gender:
+<input type="radio" name="gender" value="male">Male
+<input type="radio" name="gender" value="female">Female<br>
+Hobby:
+<input type="checkbox" name="hobby" value="reading">Reading
+<input type="checkbox" name="hobby" value="playing">Playing
+<input type="checkbox" name="hobby" value="singing">Singing<br>
+masseage:
+<textarea style="masseage"></textarea><br>
+Country:
+<select name="country">
+<option value="BD">Bangladesh</option>
+<option value="In">India</option>
+
+<option value="PK">Pakistan</option><br>
+
+
+
+</select>
+
+</fieldset>
+
+
+
+
+
+<button type="reset" value="reset">reset</button>
+<button type="button" onClick="displayFormData()">submit</button><br>
+
+
+
+</form>
+
+Name: <p id="demo"></p>
+ID: <p id="demo1"></p>
+Gender: <p id="demo2"></p>
+Hobby: <p id="demo3"></p>
+masseage: <p id="demo4"></p>
+Country: <p id="demo5"></p>
+
+
+</body>
+</html>

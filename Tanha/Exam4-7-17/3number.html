@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>object</title>
+
+</head>
+
+<body>
+<script>
+function number( sn, mn, en){
+	if(sn>en && sn>mn){
+		document.writeln(sn+" is Big");
+		}
+		else if(mn>en && mn>sn){
+			document.writeln(mn+" is big");
+			}
+			else if(en>sn && en>mn){
+			document.writeln(en+" is Big");
+			}
+			else if(sn=mn=en){
+			document.writeln(" Equal ");
+			}
+	}
+	number(45,45,45)
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Form</title>
+	<script>
+        var win;
+        function openWindow(){
+            win = window.open("","","width=400");
+            win.document.write("<h2>Form output</h2><hr>");
+            }
+        function closeWindow(){
+            win.close();
+            }
+        function add(){
+            with(document){
+				var fullname = myForm.fullname.value;
+				var emailad = myForm.emailad.value;
+				var i = emailad.indexOf('@');
+				var j = emailad.lastIndexOf('.');
+				if(i<1 || j<1){
+					alert("Your email is invalid.");
+					return;
+					}else{
+						alert("Your email is valid.");
+						}
+				var pass = myForm.pass.value;
+				if(pass.length<6){
+					alert("Password must be greater than 6 characters.");
+					return;
+					}
+				var gender = myForm.gender.value;
+				
+				var hobby = "";
+				if(myForm.Reading.checked)
+					hobby += "Reading, ";
+				if(myForm.Writing.checked)
+					hobby += "Writing, ";
+				
+				var country = myForm.country.value;
+				var comment = myForm.comment.value;
+				}
+			
+			with(win.document){
+				write("Your fullname is: "+ fullname+"<br>"+
+				"Your emailad is: "+ emailad+"<br>"+
+				"Your password is: "+ pass+"<br>"+
+				"Your gender is: "+ gender+"<br>"+
+				"Your hobby is: "+ hobby+"<br>"+
+				"Your country is: "+ country+"<br>"+
+				"Your comment is: "+ comment+"<br>");
+				}
+            }
+    </script>
+</head>
+
+<body>
+    <form name="myForm">
+    	Name:
+        <input type="text" name="fullname" value="Shamim Sarker"><p>
+        Email:
+        <input type="email" name="emailad" value="shamimsjava@gmail.com"><p>
+        Password:
+        <input type="password" name="pass" value="123456"><p>
+        Gender:
+        <input type="radio" name="gender" value="Male" checked> Male
+        <input type="radio" name="gender" value="Female"> Female<p>
+        Hobby:
+        <input type="checkbox" id="Reading" checked>Reading
+        <input type="checkbox" id="Writing">Writing<p>
+        Country:
+        <select name="country">
+        	<option value="Bangladesh">Bangladesh</option>
+            <option value="Nepal">Nepal</option>
+        </select><p>
+        Comment:
+        <textarea name="comment">This is sample comment.......</textarea><p>
+        <button type="reset">Clear</button>
+    </form>
+    <button onClick="openWindow()">Open</button>
+    <button onClick="add()">Add</button>
+    <button onClick="closeWindow()">Close</button>
+</body>
+</html>

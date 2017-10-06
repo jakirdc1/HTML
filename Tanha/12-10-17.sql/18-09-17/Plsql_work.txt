@@ -1,0 +1,300 @@
+
+SQL> insert into round values(round_seq.nextval,'c++');
+
+1 row created.
+
+SQL> insert into round values(round_seq.nextval,'network');
+
+1 row created.
+
+SQL> create or replace trigger student_after_insert
+  2  after insert on student
+  3  for each row
+  4  beign
+  5  dbms_output.put_line('inserted');
+  6  end;
+  7  /
+beign
+*
+ERROR at line 4:
+ORA-04079: invalid trigger specification
+
+
+SQL> create or replace trigger student_after_insert
+  2  after insert on student
+  3  for each row
+  4  beign
+  5
+  6
+  7  create or replace trigger student_after_insert
+  8  after insert on student
+  9  for each row
+ 10  begin
+ 11  dbms_output.put_line('inserted');
+ 12  end;
+ 13  /
+beign
+*
+ERROR at line 4:
+ORA-04079: invalid trigger specification
+
+
+SQL> create or replace trigger student_after_insert
+  2  after insert on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('inserted');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> create or replace trigger student_after_update
+  2  after update on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('updated');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> create or replace trigger student_after_delete
+  2  after delete on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('deleted');
+  6  end;
+  7  /
+
+Trigger created.
+
+SQL> insert into student values(1,'parvez',25,100);
+
+1 row created.
+
+SQL> insert into student values(2,'zakir',25,110);
+
+1 row created.
+
+SQL> insert into student values(2,'atik',25,120);
+insert into student values(2,'atik',25,120)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MOHAMMAD.SYS_C007133) violated
+
+
+SQL> insert into student values(3,'atik',25,120);
+
+1 row created.
+
+SQL> insert into student values(4,'urmi',25,130);
+
+1 row created.
+
+SQL> update student set student_id=
+  2  5 where student_id=4;
+
+1 row updated.
+
+SQL> select * from student;
+
+STUDENT_ID STUDENT_NAME                                              AGE
+---------- -------------------------------------------------- ----------
+  ROUND_ID
+----------
+         1 parvez                                                     25
+       100
+
+         2 zakir                                                      25
+       110
+
+         3 atik                                                       25
+       120
+
+
+STUDENT_ID STUDENT_NAME                                              AGE
+---------- -------------------------------------------------- ----------
+  ROUND_ID
+----------
+         5 urmi                                                       25
+       130
+
+
+SQL> set spaceline 250;
+SP2-0158: unknown SET option "spaceline"
+SQL> set line 250;
+SQL> select * from student;
+
+STUDENT_ID STUDENT_NAME                                              AGE   ROUND_ID
+---------- -------------------------------------------------- ---------- ----------
+         1 parvez                                                     25        100
+         2 zakir                                                      25        110
+         3 atik                                                       25        120
+         5 urmi                                                       25        130
+
+SQL> set serveroutput on;
+SQL> update student set student_id=6
+  2  where student_id=3;
+updated
+
+1 row updated.
+
+SQL> create view student_v as
+  2  select * from student;
+
+View created.
+
+SQL> select * from student_v;
+
+STUDENT_ID STUDENT_NAME                                              AGE   ROUND_ID
+---------- -------------------------------------------------- ---------- ----------
+         1 parvez                                                     25        100
+         2 zakir                                                      25        110
+         6 atik                                                       25        120
+         5 urmi                                                       25        130
+
+SQL> create public synonym st_v for student_v;
+
+Synonym created.
+
+SQL> create or replace trigger display_age_change
+  2  after insert on student
+  3  for each row
+  4  when(new.student_id>0)
+  5  declare
+  6  age_diff :=:new.age - old.age;
+  7  dbms_output.put_line('old age:'||:old.age);
+  8  dbms_output.put_line('new age:'||:new.age);
+  9  dbms_output.put_line('age difference:'||:age_diff);
+ 10  end;
+ 11  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> create or replace trigger display_age_change
+  2  after insert on student
+  3  for each row
+  4  when(new.student_id>0)
+  5  declare
+  6  age_diff :=:new.age - old.age;
+  7  dbms_output.put_line('old age:'||:old.age);
+  8  dbms_output.put_line('new age:'||:new.age);
+  9  dbms_output.put_line('age difference:'||age_diff);
+ 10  end;
+ 11  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> show err;
+Errors for TRIGGER DISPLAY_AGE_CHANGE:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+2/10     PLS-00103: Encountered the symbol "=" when expecting one of the
+         following:
+         constant exception <an identifier>
+         <a double-quoted delimited-identifier> table long double ref
+         char time timestamp interval date binary national character
+         nchar
+         The symbol "<an identifier>" was substituted for "=" to continue.
+
+
+3/12     PLS-00103: Encountered the symbol "." when expecting one of the
+         following:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+         constant exception <an identifier>
+         <a double-quoted delimited-identifier> table long double ref
+         char time timestamp interval date binary national character
+         nchar
+         The symbol "<an identifier>" was substituted for "." to continue.
+
+
+4/12     PLS-00103: Encountered the symbol "." when expecting one of the
+         following:
+         constant exception <an identifier>
+         <a double-quoted delimited-identifier> table long double ref
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+         char time timestamp interval date binary national character
+         nchar
+         The symbol "<an identifier>" was substituted for "." to continue.
+
+
+5/12     PLS-00103: Encountered the symbol "." when expecting one of the
+         following:
+         constant exception <an identifier>
+         <a double-quoted delimited-identifier> table long double ref
+         char time timestamp interval date binary national character
+         nchar
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+         The symbol "<an identifier>" was substituted for "." to continue.
+
+
+6/1      PLS-00103: Encountered the symbol "END" when expecting one of the
+         following:
+         begin function pragma procedure subtype type <an identifier>
+         <a double-quoted delimited-identifier> current cursor delete
+         exists prior
+
+SQL> desc student;
+ Name                                                                                                                                    Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------
+ STUDENT_ID                                                                                                                              NOT NULL NUMBER(10)
+ STUDENT_NAME                                                                                                                                     VARCHAR2(50)
+ AGE                                                                                                                                              NUMBER(10)
+ ROUND_ID                                                                                                                                         NUMBER(10)
+
+SQL> select * from student;
+
+STUDENT_ID STUDENT_NAME                                              AGE   ROUND_ID
+---------- -------------------------------------------------- ---------- ----------
+         1 parvez                                                     25        100
+         2 zakir                                                      25        110
+         6 atik                                                       25        120
+         5 urmi                                                       25        130
+
+SQL> set serveroutput on;
+SQL>
+SQL>
+SQL>
+SQL> create or replace trigger display_age
+  2  after update on student
+  3  for each row
+  4  begin
+  5  update student
+  6  set age = 30
+  7  where student_id = 1;
+  8  dbms_output.put_line('new age:'||:new.age);
+  9  dbms_output.put_line('old age:'||:old.age);
+ 10  end;
+ 11  /
+
+Trigger created.
+
+SQL> create or replace trigger display_age
+  2  after update on student
+  3  for each row
+  4  begin
+  5  dbms_output.put_line('new age:'||:new.age);
+  6  dbms_output.put_line('old age:'||:old.age);
+  7  end;
+  8  /
+
+Trigger created.
+
+SQL> update student
+  2  set age = 30
+  3  where student_id = 1;
+new age:30
+old age:25
+updated
+
+1 row updated.
+
+SQL>

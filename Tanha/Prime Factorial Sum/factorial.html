@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script>
+			function calFactorial(){
+				var x = prompt("Enter value to detenminate factorial","");
+				var mul=1;
+				for(var sn=1; sn<=x; sn++){
+					mul *= sn;
+				}
+				document.getElementById("demo").innerHTML= "Factorial is: "+ mul;
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="Show factorial" onClick="calFactorial()"><br>
+  		Sum <p id="demo"></p>
+	</body>
+</html>

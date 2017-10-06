@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script>
+			function numberSum(N) {
+			  var total = 0;
+			    for(var i = 1; i <= N; i++){
+			      total += i;
+			    }
+			    return total;
+			}
+
+			function run(){
+			  var val = document.getElementById("val").value;
+			  document.getElementById("results").innerHTML=val+": "+numberSum(val)
+			 }
+		</script>
+	</head>
+	<body>
+		<input id="val">
+		<input type="Submit" onclick="run();">
+		<p id="results"></p>
+	</body>
+</html>

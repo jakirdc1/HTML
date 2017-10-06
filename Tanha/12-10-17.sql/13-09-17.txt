@@ -1,0 +1,9 @@
+create user parvez identified by parvez;
+grant dba to parvez;
+conn parvez/parvez;
+create table department(dep_id number(10) primary key,dep_name varchar2(30)unique);
+create table employee(emp_id number(10) primary key,emp_name varchar2(30),dep_id number(10),
+constraint emp_fk_dep foreign key (dep_id) references department(dep_id));
+insert into department values(101,'philosophy');
+insert into department values(102,'physich');
+insert into department values(103,'accounting');

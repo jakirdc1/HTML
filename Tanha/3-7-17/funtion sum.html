@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Untitled Document</title>
+    </head>
+    
+    <body>
+    <script>
+    
+		function calculateSum(sn, en){
+			var sum =0;
+			
+			for(sn;sn<=en; sn++){
+				sum+=sn;
+				}
+			document.getElementById('demo').innerHTML=sum;
+		}
+    </script>
+    <button type="button" onClick="calculateSum(20,25)">Click Me</button>
+    <p id="demo"></p>
+    </body>
+</html>
